@@ -86,4 +86,4 @@ if __name__ == "__main__":
                 wavelet_noising(data[_]["green"]),
                 wavelet_noising(data[_]["blue"])
                 ]
-        draw(test, "pic/filter_%d" % _)
+        draw(test, "pic/filter_%d" % _,0)

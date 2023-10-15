@@ -11,10 +11,13 @@ data = [pd.read_excel(excel_file[0]), pd.read_excel(excel_file[1]), pd.read_exce
 color = ["red", "green", "blue"]
 
 back_excl = [data[0] - data[2], data[1] - data[2]]
-
-for _ in range(2):
-    test = [wavelet_noising(back_excl[_]["red"]),
-            wavelet_noising(back_excl[_]["green"]),
-            wavelet_noising(back_excl[_]["blue"])
-            ]
-    draw(test, "pic/excel_filter_%d"%_)
+data_f_env = [[wavelet_noising(back_excl[0]["red"]),
+               wavelet_noising(back_excl[0]["green"]),
+               wavelet_noising(back_excl[0]["blue"])],
+              [wavelet_noising(back_excl[1]["red"]),
+               wavelet_noising(back_excl[1]["green"]),
+               wavelet_noising(back_excl[1]["blue"])
+               ]]
+if __name__ == "__main__":
+    for _ in range(2):
+        draw(data_f_env[_], "pic/excel_filter_%d" % _, 0)
