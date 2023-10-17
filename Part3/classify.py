@@ -47,7 +47,20 @@ for i in range(2):
     # plt.savefig("pic/peak_%d" % i)
     # plt.show()
 
-print(threshold[0][0][0].labels_)
+
+def getcolor(y, channel):
+    color_classify = ["red", "green", "lightgray"]
+    threshold = [[400, 2000],
+                 [200, 1200],
+                 [200, 1200]]
+    if y < threshold[channel][0]:
+        color = color_classify[2]
+    elif y < threshold[channel][1]:
+        color = color_classify[1]
+    else:
+        color = color_classify[0]
+    return color
+
 
 for pic in range(2):
     pic_p_f_env, ax = plt.subplots(1, 1, figsize=(16, 9))
@@ -55,6 +68,10 @@ for pic in range(2):
     ax.set_yticks(range(0, 2801, 400))
     for channel in range(3):
         pra_cla = threshold[pic][channel][0].labels_
-        for classify in pra_cla:
-            print(classify)
-           # ax.plot(peak[pic][channel])
+        ax.plot(range(3300), data_f_env[pic][channel], color=color[channel])
+        for classify in range(pra_cla.size):
+            x = peak[pic][channel][0][classify]
+            y = data_f_env[pic][channel][x]
+            ax.scatter(x, y, 100, color=getcolor(y,channel))
+    plt.savefig("pic/_classify_result_%d" % pic)
+    plt.show()
